@@ -1,0 +1,1 @@
+  is_compited = models.BooleanField(default=False)

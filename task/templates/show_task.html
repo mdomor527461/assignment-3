@@ -1,0 +1,30 @@
+{%extends 'base.html' %} {%block content%}
+<h1 class="text-center text-info mt-5">This is show task page</h1>
+<div class="d-flex flex-wrap p-3 ">
+  {% for task in tasks%}
+  <div class="col-sm-4">
+    <div class="card m-3">
+      <div class="card-body text-light pt-5" style="height: 60vh; border-radius: 20px; background-color: rgb(26, 23, 23);" >
+        <h5 class="card-title">Task Title : {{task.taskTitle}}</h5>
+        <p class="card-text">Description : {{task.taskDescription}}</p>
+        <p>Task Release Date : {{task.taskAssignDate}}</p>
+        Categories : {%for cat in task.category.all%} {{cat.categoryName}} &nbsp; &nbsp; &nbsp;
+        {%endfor%}
+        <p></p>
+        {%if task.is_completed == True%}
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary p-2">Completed</button>
+        </div>
+        {%else%}
+        <div class="mt-2 d-flex justify-content-center">
+            <a href="{%url 'edit' task.id%}"><button class="btn btn-warning" style="margin-right: 10px;">Edit</button></a>
+            <a href="{%url 'delete' task.id%}"><button class="btn btn-danger" style="margin-left: 10px;">Delete</button></a>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+{%endblock%}
